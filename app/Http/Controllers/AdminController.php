@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminController extends Controller
 {
@@ -22,6 +23,7 @@ class AdminController extends Controller
         $validate = $request->only('email', 'password');
         
         if (Auth::guard('admin')->attempt($validate)) {
+            Alert::success('Berhasil', 'Login berhasil!');
             return redirect()->route('admin.dashboard');
         }
 
@@ -34,6 +36,7 @@ class AdminController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        Alert::success('Berhasil', 'Log out berhasil!');
 
         return redirect()->route('admin.login');
     }

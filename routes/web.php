@@ -24,12 +24,14 @@ Route::get('/', function () {
 Route::get('/admin-login', [AdminController::class, 'login'])->name('admin.login');
 Route::post('/admin-login', [AdminController::class, 'authenticate'])->name('login');
 
+Route::middleware(['check_user_login:admin'])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::post('/admin-logout', [AdminController::class, 'logout'])->name('admin.logout');
+});
+
 Route::middleware(['auth'])->group(function () {
     //admin
-    Route::middleware(['check_user_login:admin'])->prefix('admin')->group(function () {
-        Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-        Route::post('/admin-logout', [AdminController::class, 'logout'])->name('admin.logout');
-    });
+
 
     //dokter
     Route::middleware(['check_user_login:dokter'])->prefix('dokter')->group(function () {
