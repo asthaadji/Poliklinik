@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::create('table_dokter', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('name');
-        //     $table->string('alamat');
-        //     $table->bigInteger('no_hp')->unique();
-        //     $table->foreignId('id_poli') ->constrained('table_poli') ->onDelete('cascade');
-        //     $table->timestamps();
-        // });
+        Schema::create('table_dokter', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('alamat');
+            $table->bigInteger('no_hp')->unique();
+            $table->foreignId('id_poli') ->constrained('table_poli') ->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
     /**

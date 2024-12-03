@@ -7,54 +7,53 @@
     <title>Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .gradient-custom {
-            /* fallback for old browsers */
-            background: #cecece;
-        }
-    </style>
+    
 </head>
-<body>
+<body style="background-color: rgb(197, 197, 197)">
 
-<section class="vh-100 gradient-custom">
-  @include('sweetalert::alert')
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <div class="card bg-dark text-white" style="border-radius: 1rem;">
-          <div class="card-body p-5 text-center">
+<!-- Section: Design Block -->
+<section class="text-center" >
+  <!-- Background image -->
+  <div class="p-5 bg-image" style="
+        background-image: url('https://auliahospital.co.id/wp-content/uploads/2019/09/Header-Aulia-Center-Excellent.jpg');
+        height: 300px;
+        "></div>
+  <!-- Background image -->
 
-            <div class="mb-md-5 mt-md-4 pb-5">
+  <div class="card mx-4 mx-md-5 shadow-5-strong bg-body-tertiary" style="
+        margin-top: -100px;
+        backdrop-filter: blur(30px);
+        ">
+    <div class="card-body py-5 px-md-5">
 
-              <h2 class="fw-bold mb-2 text-uppercase">Login Admin</h2>
-              <p class="text-white-50 mb-5"></p>
-
-              @if ($errors->any())
-                <div class="alert alert-danger">
-                  <ul>
-                    @foreach ($errors->all() as $error)
-                      <li>{{ $error }}</li>
-                    @endforeach
-                  </ul>
-                </div>
-              @endif
-
-              <form method="POST" action="{{route('login')}}">
-                @csrf
-                <div class="form-outline form-white mb-4">
-                  <input type="email" placeholder="Email" name="email" id="typeEmailX" class="form-control form-control-lg" required />
-                </div>
-
-                <div class="form-outline form-white mb-4">
-                  <input type="password" placeholder="password" name="password" id="typePasswordX" class="form-control form-control-lg" required />
-                </div>
-
-                <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-              </form>
-
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="fw-bold mb-5">Login Admin</h2>
+          
+          @if ($errors->any())
+            <div class="alert alert-danger">
+              <ul>
+                @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
             </div>
+          @endif
 
-          </div>
+          <form method="POST" action="{{ route('login') }}">
+            @csrf
+            <div class="form-outline mb-4">
+              <input type="email" name="email" id="typeEmailX" class="form-control" placeholder="Email" required />
+            </div>
+            <div class="form-outline mb-4">
+              <input type="password" name="password" id="typePasswordX" class="form-control" placeholder="Password" required />
+            </div>
+            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
+              Login
+            </button>
+
+          </form>
+
         </div>
       </div>
     </div>
