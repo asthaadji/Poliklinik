@@ -19,12 +19,12 @@ class CheckUserLogin
         if ($userType == 'admin') {
             $user = Auth::guard('admin')->user(); 
             if (!$user) {
-                return redirect()->route('admin.auth.login');
+                return redirect()->route('admin.login');
             }
         } elseif ($userType == 'dokter') {
             $user = Auth::guard('dokter')->user();
             if (!$user) {
-                return redirect()->route('dokter.auth.login'); 
+                return redirect()->route('dokter.login'); 
             }
         } elseif ($userType == 'pasien') {
             $user = Auth::guard('pasien')->user();

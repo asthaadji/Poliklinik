@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\DokterModel;
 use App\Models\PoliModel;
 use Illuminate\Http\Request;
@@ -10,16 +11,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class DokterController extends Controller
 {
-    public function authenticate(Request $request)
-    {
-        $validate = $request->only('name', 'no_hp');
-        
-        if (Auth::guard('dokter')->attempt($validate)) {
-            return redirect()->route('dokter.dashboard');
-        }
-
-        return back()->withErrors(['name' => 'Name atau password salah.']);
-    }
 
     public function index()
     {

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('alamat');
-            $table->bigInteger('no_hp')->unique();
+            $table->string('no_hp')->unique();
             $table->foreignId('id_poli') ->constrained('table_poli') ->onDelete('cascade');
             $table->timestamps();
         });

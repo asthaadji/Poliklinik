@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\DokterController;
-use App\Http\Controllers\PasienController;
-use App\Http\Controllers\PoliController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\DokterController;
+use App\Http\Controllers\Admin\ObatController;
+use App\Http\Controllers\Admin\PoliController;
+use App\Http\Controllers\Dokter\DokterRoleController;
+use App\Http\Controllers\Admin\PasienController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,12 +44,28 @@ Route::middleware(['check_user_login:admin'])->prefix('admin')->group(function (
     Route::patch('/dokter/{dokter}', [DokterController::class, 'update'])->name('admin.dokter.update');
     Route::delete('/dokter/{dokter}', [DokterController::class, 'destroy'])->name('admin.dokter.destroy');
 
+    //obat
+    Route::get('/obat', [ObatController::class, 'index'])->name('admin.obat');
+    Route::post('/obat', [ObatController::class, 'store'])->name('admin.obat.store');
+    Route::patch('/obat/{obat}', [ObatController::class, 'update'])->name('admin.obat.update');
+    Route::delete('/obat/{obat}', [ObatController::class, 'destroy'])->name('admin.obat.destroy');
+
+    //pasien
+    Route::get('/pasien', [PasienController::class, 'index'])->name('admin.pasien');
+    Route::post('/pasien', [PasienController::class, 'store'])->name('admin.pasien.store');
+    Route::patch('/pasien/{pasien}', [PasienController::class, 'update'])->name('admin.pasien.update');
+    Route::delete('/pasien/{pasien}', [PasienController::class, 'destroy'])->name('admin.pasien.destroy');
+
 });
 
 //dokter
+Route::get('/dokter-login', [DokterRoleController::class, 'loginPage'])->name('dokter.login');
+Route::post('/dokter-login', [DokterRoleController::class, 'authenticate'])->name('login');
+
+//dokter
 Route::middleware(['check_user_login:dokter'])->prefix('dokter')->group(function () {
-    Route::get('/login', [DokterController::class, 'login'])->name('dokter.login');
-    Route::get('/dashboard', [DokterController::class, 'index'])->name('dokter.dashboard');
+    Route::get('/dashboard', [DokterRoleController::class, 'index'])->name('dokter.dashboard');
+    Route::post('/dokter-logout', [DokterRoleController::class, 'logout'])->name('dokter.logout');
 });
 
 //pasien

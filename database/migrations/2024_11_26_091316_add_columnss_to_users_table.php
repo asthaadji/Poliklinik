@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('alamat');
             $table->bigInteger('no_ktp');
-            $table->bigInteger('no_hp');
+            $table->string('no_hp');
             $table->string('no_rm');
         });
     }

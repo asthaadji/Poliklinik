@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class DokterModel extends Model
+class DokterModel extends Authenticatable
 {
     use HasFactory;
 
@@ -15,5 +16,15 @@ class DokterModel extends Model
     public function poli()
     {
         return $this->belongsTo(PoliModel::class, 'id_poli');
+    }
+
+    public function getAuthIdentifierName()
+    {
+        return 'no_hp';
+    }
+
+    public function getAuthIdentifier()
+    {
+        return $this->no_hp;
     }
 }

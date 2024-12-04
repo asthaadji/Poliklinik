@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
-@section('title','Admin Poli')
+@section('title','Obat Dashboard')
 
 @section('content')
 <div class="container">
-    <h1>Poli Panel</h1>
+    <h1>Obat Panel</h1>
     <button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#addModal">
-        Tambah Data Poli
+        Tambah Data Obat
     </button>
 
     @if(session('success'))
@@ -27,25 +27,27 @@
 
     <div class="card">
         <div class="card-header">
-            <h2>Data Pasien</h2>
+            <h2>Data Obat</h2>
         </div>
         <div class="card-body">
             <table class="table table-bordered">
                 <thead style="background-color: black">
                     <tr class="text-white">
-                        <th>Nama Poli</th>
-                        <th>Keterangan Poli</th>
+                        <th>Nama Obat</th>
+                        <th>Kemasan</th>
+                        <th>Harga</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($data as $item)
                         <tr>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->keterangan }}</td>
+                            <td>{{ $item->nama_obat }}</td>
+                            <td>{{ $item->kemasan }}</td>
+                            <td>Rp.{{ $item->harga }}</td>
                             <td>
                                 <button class="btn btn-warning btn-sm" onclick="editPoli({{ $item }})">Edit</button>
-                                <form action="{{ route('admin.poli.destroy', $item->id) }}" method="POST" style="display:inline;" id="deleteForm_{{ $item->id }}">
+                                <form action="{{ route('admin.obat.destroy', $item->id) }}" method="POST" style="display:inline;" id="deleteForm_{{ $item->id }}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $item->id }})">Delete</button>
@@ -63,19 +65,23 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Tambah Data Poli</h5>
+                    <h5 class="modal-title" id="addModalLabel">Tambah Data Obat</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admin.poli.store') }}" method="POST" id="addForm">
+                    <form action="{{ route('admin.obat.store') }}" method="POST" id="addForm">
                         @csrf
                         <div class="mb-3">
-                            <label for="name" class="form-label">Nama Poli: </label>
-                            <input type="text" class="form-control" name="name" required>
+                            <label for="nama_obat" class="form-label">Nama Obat:</label>
+                            <input type="text" class="form-control" name="nama_obat" id="nama_obat" required>
                         </div>
                         <div class="mb-3">
-                            <label for="keterangan" class="form-label">Keterangan:</label>
-                            <input type="text" class="form-control" name="keterangan" required>
+                            <label for="kemasan" class="form-label">Kemasan:</label>
+                            <input type="text" class="form-control" name="kemasan" id="kemasan" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="harga" class="form-label">Harga:</label>
+                            <input type="number" class="form-control" name="harga" id="harga" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </form>
@@ -92,17 +98,21 @@
                 @method('PATCH')
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editModalLabel">Edit Data Poli</h5>
+                        <h5 class="modal-title" id="editModalLabel">Edit Data Obat</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="edit_name" class="form-label">Nama Poli:</label>
-                            <input type="text" class="form-control" name="name" id="edit_name" required>
+                            <label for="edit_nama_obat" class="form-label">Nama Obat:</label>
+                            <input type="text" class="form-control" name="nama_obat" id="edit_nama_obat" required>
                         </div>
                         <div class="mb-3">
-                            <label for="edit_keterangan" class="form-label">Keterangan:</label>
-                            <input type="text" class="form-control" name="keterangan" id="edit_keterangan" required>
+                            <label for="edit_kemasan" class="form-label">Kemasan:</label>
+                            <input type="text" class="form-control" name="kemasan" id="edit_kemasan" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_harga" class="form-label">Harga:</label>
+                            <input type="number" class="form-control" name="harga" id="edit_harga" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Update</button>
                     </div>
@@ -114,13 +124,14 @@
 
 <script>
     function editPoli(item) {
-        $('#editModalLabel').text('Edit Data Poli');
+        $('#editModalLabel').text('Edit Data Obat');
 
         //action set
-        $('#editForm').attr('action', '/admin/poli/' + item.id);
+        $('#editForm').attr('action', '/admin/obat/' + item.id);
         //item
-        $('#edit_name').val(item.name);
-        $('#edit_keterangan').val(item.keterangan);
+        $('#edit_nama_obat').val(item.nama_obat);
+        $('#edit_kemasan').val(item.kemasan);
+        $('#edit_harga').val(item.harga);
 
         $('#editModal').modal('show');
     }
@@ -128,7 +139,7 @@
     function confirmDelete(id) {
         Swal.fire({
             title: 'Apakah Anda yakin?',
-            text: 'Data Poli ini akan dihapus!',
+            text: 'Data Obat ini akan dihapus!',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
@@ -140,7 +151,7 @@
                 document.getElementById('deleteForm_' + id).submit();
                 Swal.fire(
                     'Dihapus!',
-                    'Data Poli telah berhasil dihapus.',
+                    'Data Obat telah berhasil dihapus.',
                     'success'
                 );
             }
