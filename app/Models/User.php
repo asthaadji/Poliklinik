@@ -27,5 +27,15 @@ class User extends Authenticatable
         'no_rm',
     ];
 
+    public function getAuthIdentifierName()
+    {
+        return 'no_ktp';
+    }
+
+    public function getAuthIdentifier()
+    {
+        return $this->no_ktp;
+    }
+
 
 }

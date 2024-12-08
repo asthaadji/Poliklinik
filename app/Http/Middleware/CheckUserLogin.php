@@ -29,7 +29,7 @@ class CheckUserLogin
         } elseif ($userType == 'pasien') {
             $user = Auth::guard('pasien')->user();
             if (!$user) {
-                return redirect()->route('pasien.auth.login');
+                return redirect()->route('pasien.login');
             }
         }
 

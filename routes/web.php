@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\PoliController;
 use App\Http\Controllers\Dokter\DokterRoleController;
 use App\Http\Controllers\Admin\PasienController;
 use App\Http\Controllers\Dokter\JadwalPeriksa;
+use App\Http\Controllers\Pasien\PasienRoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +27,7 @@ Route::get('/', function () {
 
 //admin
 Route::get('/admin-login', [AdminController::class, 'login'])->name('admin.login');
-Route::post('/admin-login', [AdminController::class, 'authenticate'])->name('login');
+Route::post('/admin-login', [AdminController::class, 'authenticate'])->name('admin.login');
 
 //admin
 Route::middleware(['check_user_login:admin'])->prefix('admin')->group(function () {
@@ -79,9 +80,13 @@ Route::middleware(['check_user_login:dokter'])->prefix('dokter')->group(function
 });
 
 //pasien
+Route::get('/pasien-login', [PasienRoleController::class, 'authPage'])->name('pasien.login');
+Route::post('/login', [PasienRoleController::class, 'login'])->name('pasien.login');
+Route::post('/register', [PasienRoleController::class, 'register'])->name('pasien.register');
+
 Route::middleware(['check_user_login:pasien'])->prefix('pasien')->group(function () {
-    Route::get('/login', [PasienController::class, 'login'])->name('pasien.login');
-    Route::get('/dashboard', [PasienController::class, 'index'])->name('pasien.dashboard');
+    Route::get('/dashboard', [PasienRoleController::class, 'index'])->name('pasien.dashboard');
+    Route::post('/pasien-logout', [PasienRoleController::class, 'logout'])->name('pasien.logout');
 });
 
 
