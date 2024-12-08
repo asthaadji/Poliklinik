@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ObatController;
 use App\Http\Controllers\Admin\PoliController;
 use App\Http\Controllers\Dokter\DokterRoleController;
 use App\Http\Controllers\Admin\PasienController;
+use App\Http\Controllers\Dokter\JadwalPeriksa;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,6 +67,15 @@ Route::post('/dokter-login', [DokterRoleController::class, 'authenticate'])->nam
 Route::middleware(['check_user_login:dokter'])->prefix('dokter')->group(function () {
     Route::get('/dashboard', [DokterRoleController::class, 'index'])->name('dokter.dashboard');
     Route::post('/dokter-logout', [DokterRoleController::class, 'logout'])->name('dokter.logout');
+
+    //profile
+    Route::patch('/profile/{profile}', [DokterRoleController::class, 'update'])->name('dokter.profile.update');
+
+    //jadwal
+    Route::get('/jadwal', [JadwalPeriksa::class, 'index'])->name('dokter.jadwal');
+    Route::post('/jadwal', [JadwalPeriksa::class, 'store'])->name('dokter.jadwal.store');
+    Route::patch('/jadwal/{jadwal}', [JadwalPeriksa::class, 'update'])->name('dokter.jadwal.update');
+    Route::delete('/jadwal/{jadwal}', [JadwalPeriksa::class, 'destroy'])->name('dokter.jadwal.destroy');
 });
 
 //pasien

@@ -18,6 +18,11 @@ class DokterModel extends Authenticatable
         return $this->belongsTo(PoliModel::class, 'id_poli');
     }
 
+    public function jadwals()
+    {
+        return $this->hasMany(ModelJadwalPeriksa::class, 'id_dokter');
+    }
+
     public function getAuthIdentifierName()
     {
         return 'no_hp';
@@ -27,4 +32,5 @@ class DokterModel extends Authenticatable
     {
         return $this->no_hp;
     }
+
 }

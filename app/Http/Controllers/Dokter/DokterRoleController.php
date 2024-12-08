@@ -7,12 +7,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\Controller;
+use App\Models\PoliModel;
 
 class DokterRoleController extends Controller
 {
     public function index()
     {
-        return view('dokter.index');
+        $data = DokterModel::all();
+        $datapoli = PoliModel::all();
+        return view('dokter.index', compact('data','datapoli'));
     }
     public function loginPage()
     {
@@ -43,4 +46,27 @@ class DokterRoleController extends Controller
 
         return redirect()->route('dokter.login');
     }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'no_hp' => 'required|string|max:15',
+            'id_poli' => 'required|exists:table_poli,id', 
+        ]);
+
+        $dokter = DokterModel::findOrFail($id);
+
+        $dokter->update([
+            'name' => $request->name,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
+            'id_poli' => $request->id_poli,  
+        ]);
+        Alert::success('Berhasil', 'Data dokter berhasil diperbarui!');
+
+        return redirect()->route('dokter.dashboard');
+    }
+
 }

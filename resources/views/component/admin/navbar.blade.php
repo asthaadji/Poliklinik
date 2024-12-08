@@ -46,7 +46,7 @@
       <li class="nav-item">
         <form action="{{route('admin.logout')}}" method="POST">
             @csrf
-            <button class="btn btn-danger" type="submit">Logout</button>
+            <button class="btn btn-danger btn-block" type="submit">Logout</button>
         </form>
       </li>
     </ul>
