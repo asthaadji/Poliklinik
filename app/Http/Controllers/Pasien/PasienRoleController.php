@@ -19,7 +19,9 @@ class PasienRoleController extends Controller
 
     public function index()
     {
-        return view('pasien.index');
+        $user = Auth::guard('pasien')->user();
+        $data = User::where('id', $user->id)->get();
+        return view('pasien.index', compact('data'));
     }
 
     private function generateNoRM()
@@ -88,5 +90,27 @@ class PasienRoleController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('pasien.login')->with('success', 'You have successfully logged out.');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'no_hp' => 'required|string|max:15',
+            'no_ktp' => 'required|string', 
+        ]);
+
+        $pasien = User::findOrFail($id);
+
+        $pasien->update([
+            'name' => $request->name,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
+            'no_ktp' => $request->no_ktp,  
+        ]);
+        Alert::success('Berhasil', 'Data pasien berhasil diperbarui!');
+
+        return redirect()->route('pasien.dashboard');
     }
 }

@@ -13,7 +13,8 @@ class DokterRoleController extends Controller
 {
     public function index()
     {
-        $data = DokterModel::all();
+        $user = Auth::guard('dokter')->user();
+        $data = DokterModel::where('id', $user->id)->get();
         $datapoli = PoliModel::all();
         return view('dokter.index', compact('data','datapoli'));
     }

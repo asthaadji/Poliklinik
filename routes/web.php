@@ -8,6 +8,7 @@ use App\Http\Controllers\Dokter\DokterRoleController;
 use App\Http\Controllers\Admin\PasienController;
 use App\Http\Controllers\Dokter\JadwalPeriksa;
 use App\Http\Controllers\Pasien\PasienRoleController;
+use App\Http\Controllers\Pasien\PeriksaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,7 +72,7 @@ Route::middleware(['check_user_login:dokter'])->prefix('dokter')->group(function
 
     //profile
     Route::patch('/profile/{profile}', [DokterRoleController::class, 'update'])->name('dokter.profile.update');
-
+    
     //jadwal
     Route::get('/jadwal', [JadwalPeriksa::class, 'index'])->name('dokter.jadwal');
     Route::post('/jadwal', [JadwalPeriksa::class, 'store'])->name('dokter.jadwal.store');
@@ -81,12 +82,17 @@ Route::middleware(['check_user_login:dokter'])->prefix('dokter')->group(function
 
 //pasien
 Route::get('/pasien-login', [PasienRoleController::class, 'authPage'])->name('pasien.login');
-Route::post('/login', [PasienRoleController::class, 'login'])->name('pasien.login');
+Route::post('/pasien-login', [PasienRoleController::class, 'login'])->name('pasien.login');
 Route::post('/register', [PasienRoleController::class, 'register'])->name('pasien.register');
 
 Route::middleware(['check_user_login:pasien'])->prefix('pasien')->group(function () {
     Route::get('/dashboard', [PasienRoleController::class, 'index'])->name('pasien.dashboard');
     Route::post('/pasien-logout', [PasienRoleController::class, 'logout'])->name('pasien.logout');
+    // profile
+    Route::patch('/profile/{profile}', [PasienRoleController::class, 'update'])->name('pasien.profile.update');
+
+    // periksa
+    Route::get('/periksa', [PeriksaController::class,'index'])->name('pasien.periksa');
 });
 
 
