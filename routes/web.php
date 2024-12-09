@@ -89,6 +89,7 @@ Route::middleware(['check_user_login:pasien'])->prefix('pasien')->group(function
     Route::get('/dashboard', [PasienRoleController::class, 'index'])->name('pasien.dashboard');
     Route::post('/pasien-logout', [PasienRoleController::class, 'logout'])->name('pasien.logout');
     // profile
+    Route::get('/profile', [PasienRoleController::class, 'profile'])->name('pasien.profile');
     Route::patch('/profile/{profile}', [PasienRoleController::class, 'update'])->name('pasien.profile.update');
 
     // daftar poli

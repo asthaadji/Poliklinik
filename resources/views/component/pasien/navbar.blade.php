@@ -1,36 +1,42 @@
-<nav class="mt-2">
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <li class="nav-item">
-            <a href="{{route('pasien.dashboard')}}" class="nav-link" style="color: #ffffff;">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-              </p>
+<header id="header" class="header sticky-top">
+
+    <div class="branding d-flex align-items-center">
+
+        <div class="container position-relative d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center me-auto">
+                <!-- Uncomment the line below if you also wish to use an image logo -->
+                <!-- <img src="assets/img/logo.png" alt=""> -->
+                <h1 class="sitename">Bengkel-Lab</h1>
             </a>
-          </li>
-      <li class="nav-item menu-open" >
-        <a href="#" class="nav-link " style="color: #ffffff;">
-            <i class="nav-icon fas fa-th"></i>
-          <p>
-            Master
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="{{route('pasien.poli')}}" class="nav-link" style="color: #ffffff;">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Daftar Poli</p>
-            </a>
-          </li>
-          
-        </ul>
-      </li>
-      <li class="nav-item ">
-        <form action="{{route('pasien.logout')}}" method="POST">
-            @csrf
-            <button class="btn btn-danger btn-block" type="submit">Logout</button>
-        </form>
-      </li>
-    </ul>
-  </nav>
+
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="{{ route('pasien.dashboard') }}">Dashboard</a></li>
+                    <li>
+                        <a href="{{ route('pasien.poli') }}">
+                            Daftar Poli
+                        </a>
+                    </li>
+                    <li class="dropdown "><a href="#"><span>Dashboard</span> <i
+                                class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li>
+                                <a href="{{ route('pasien.profile') }}">Profile</a>
+                            </li>
+                            <li>
+                                <form action="{{ route('pasien.logout') }}" method="POST" class="px-3">
+                                    @csrf
+                                    <button class="btn btn-danger btn-block  w-100 text-start"
+                                        type="submit">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+
+    </div>
+
+</header>

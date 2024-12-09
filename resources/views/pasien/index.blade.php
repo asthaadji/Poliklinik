@@ -1,91 +1,73 @@
 @extends('layouts.pasien')
 
-@section('title','pasien Dashboard')
+@section('title', 'Pasien Dashboard')
 
 @section('content')
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h2>Profile</h2>
-            </div>
-            <div class="card-body">
-                <table class="table table-bordered">
-                    <thead class="bg-primary">
-                        <tr class="text-white">
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>No Hp</th>
-                            <th>Nama Poli</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($data as $pasien)
-                            <tr>
-                                <td>{{ $pasien->name }}</td>
-                                <td>{{ $pasien->alamat }}</td>
-                                <td>{{ $pasien->no_hp }}</td>
-                                <td>{{ $pasien->no_ktp }}</td> 
-                                <td>
-                                    <button class="btn btn-warning btn-sm" onclick="editPasien({{ $pasien }})">Edit</button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+    <!-- Hero Section -->
+    <section id="hero" class="hero section light-background">
 
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <form id="editForm" method="POST">
-                @csrf
-                @method('PATCH')
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editModalLabel">Edit Data Dokter</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <img src="{{ asset('Medilab/assets/img/hero-bg.jpg') }}" alt="" data-aos="fade-in">
+
+        <div class="container position-relative">
+
+            <div class="welcome position-relative" data-aos="fade-down" data-aos-delay="100">
+                <h2>WELCOME TO BENGKELAB</h2>
+                <p>Poli kami siap memberikan layanan kesehatan terbaik.</p>
+            </div><!-- End Welcome -->
+
+            <div class="content row gy-4">
+                <div class="col-lg-4 d-flex align-items-stretch">
+                    <div class="why-box" data-aos="zoom-out" data-aos-delay="200">
+                        <h3>Mengapa Memilih Bengkelab?</h3>
+                        <p>
+                            Bengkelab Poliklinik hadir untuk memberikan layanan kesehatan yang terpercaya dan berkualitas.
+                            Kami menyediakan berbagai fasilitas modern untuk mendukung kenyamanan dan kebutuhan kesehatan
+                            Anda.
+                        </p>
+                        <div class="text-center">
+                            <a href="#about" class="more-btn"><span>Pelajari Lebih Lanjut</span> <i
+                                    class="bi bi-chevron-right"></i></a>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="edit_name" class="form-label">Nama Dokter:</label>
-                            <input type="text" class="form-control" name="name" id="edit_name" required>
+                </div><!-- End Why Box -->
+
+                <div class="col-lg-8 d-flex align-items-stretch">
+                    <div class="d-flex flex-column justify-content-center">
+                        <div class="row gy-4">
+
+                            <div class="col-xl-4 d-flex align-items-stretch">
+                                <div class="icon-box" data-aos="zoom-out" data-aos-delay="300">
+                                    <i class="bi bi-clipboard-data"></i>
+                                    <h4>Layanan Kesehatan Terpercaya</h4>
+                                    <p>Kami menawarkan layanan kesehatan berkualitas tinggi dengan tim profesional yang
+                                        berpengalaman.</p>
+                                </div>
+                            </div><!-- End Icon Box -->
+
+                            <div class="col-xl-4 d-flex align-items-stretch">
+                                <div class="icon-box" data-aos="zoom-out" data-aos-delay="400">
+                                    <i class="bi bi-gem"></i>
+                                    <h4>Fasilitas Modern</h4>
+                                    <p>Dilengkapi dengan peralatan modern untuk memberikan pengalaman layanan kesehatan
+                                        terbaik.</p>
+                                </div>
+                            </div><!-- End Icon Box -->
+
+                            <div class="col-xl-4 d-flex align-items-stretch">
+                                <div class="icon-box" data-aos="zoom-out" data-aos-delay="500">
+                                    <i class="bi bi-inboxes"></i>
+                                    <h4>Kesehatan Anda Prioritas Kami</h4>
+                                    <p>Kami selalu siap membantu Anda mencapai kesehatan yang optimal dengan pelayanan yang
+                                        ramah dan profesional.</p>
+                                </div>
+                            </div><!-- End Icon Box -->
+
                         </div>
-                        <div class="mb-3">
-                            <label for="edit_alamat" class="form-label">Alamat:</label>
-                            <input type="text" class="form-control" name="alamat" id="edit_alamat" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_no_hp" class="form-label">No Hp:</label>
-                            <input type="text" class="form-control" name="no_hp" id="edit_no_hp" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit_no_ktp" class="form-label">No KTP:</label>
-                            <input type="text" class="form-control" name="no_ktp" id="edit_no_ktp" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </div>
-            </form>
+            </div><!-- End Content -->
+
         </div>
-    </div>
 
-    <script>
-        function editPasien(pasien) {
-            $('#editModalLabel').text('Edit Data Pasien');
-            
-            // Set action URL
-            $('#editForm').attr('action', '/pasien/profile/' + pasien.id);
-            
-            // Set form values
-            $('#edit_name').val(pasien.name);
-            $('#edit_alamat').val(pasien.alamat);
-            $('#edit_no_hp').val(pasien.no_hp);
-            $('#edit_no_ktp').val(pasien.no_ktp);
-
-            // Show modal
-            $('#editModal').modal('show');
-        }
-    </script>
+    </section><!-- /Hero Section -->
 @endsection

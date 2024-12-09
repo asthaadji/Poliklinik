@@ -19,9 +19,14 @@ class PasienRoleController extends Controller
 
     public function index()
     {
+        return view('pasien.index');
+    }
+
+    public function profile()
+    {
         $user = Auth::guard('pasien')->user();
         $data = User::where('id', $user->id)->get();
-        return view('pasien.index', compact('data'));
+        return view('pasien.profile', compact('data'));
     }
 
     private function generateNoRM()

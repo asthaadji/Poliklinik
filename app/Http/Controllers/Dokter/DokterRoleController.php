@@ -18,6 +18,7 @@ class DokterRoleController extends Controller
         $datapoli = PoliModel::all();
         return view('dokter.index', compact('data','datapoli'));
     }
+
     public function loginPage()
     {
         return view('dokter.auth.login');

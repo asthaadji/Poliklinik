@@ -31,6 +31,6 @@ class PendaftaranPoliController extends Controller
             ->with('dokter') 
             ->get();
 
-    return response()->json($jadwal);
+        return response()->json($jadwal);
     }
 }
