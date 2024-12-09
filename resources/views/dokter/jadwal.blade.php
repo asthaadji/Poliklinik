@@ -93,11 +93,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="jam_mulai" class="form-label">Jam Mulai:</label>
-                            <input type="time" class="form-control" step="2" name="jam_mulai" required>
+                            <input type="time" class="form-control" name="jam_mulai" required>
                         </div>
                         <div class="mb-3">
                             <label for="jam_selesai" class="form-label">Jam Selesai:</label>
-                            <input type="time" class="form-control" step="2" name="jam_selesai" required>
+                            <input type="time" class="form-control" name="jam_selesai" required>
                         </div>
                         <div class="mb-3">
                             <label for="status" class="form-label">Status:</label>

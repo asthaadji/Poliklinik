@@ -18,9 +18,9 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{route('pasien.periksa')}}" class="nav-link" style="color: #ffffff;">
+            <a href="{{route('pasien.poli')}}" class="nav-link" style="color: #ffffff;">
               <i class="far fa-circle nav-icon"></i>
-              <p>Daftar Periksa</p>
+              <p>Daftar Poli</p>
             </a>
           </li>
           

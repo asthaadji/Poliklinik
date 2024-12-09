@@ -8,7 +8,7 @@ use App\Http\Controllers\Dokter\DokterRoleController;
 use App\Http\Controllers\Admin\PasienController;
 use App\Http\Controllers\Dokter\JadwalPeriksa;
 use App\Http\Controllers\Pasien\PasienRoleController;
-use App\Http\Controllers\Pasien\PeriksaController;
+use App\Http\Controllers\Pasien\PendaftaranPoliController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -91,8 +91,9 @@ Route::middleware(['check_user_login:pasien'])->prefix('pasien')->group(function
     // profile
     Route::patch('/profile/{profile}', [PasienRoleController::class, 'update'])->name('pasien.profile.update');
 
-    // periksa
-    Route::get('/periksa', [PeriksaController::class,'index'])->name('pasien.periksa');
+    // daftar poli
+    Route::get('/poli', [PendaftaranPoliController::class,'index'])->name('pasien.poli');
+    Route::get('/get-poli/{id}', [PendaftaranPoliController::class, 'getJadwal']);
 });
 
 
