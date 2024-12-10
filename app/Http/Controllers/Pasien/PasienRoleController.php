@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Pasien;
 
 use App\Http\Controllers\Controller;
+use App\Models\DokterModel;
+use App\Models\PoliModel;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,7 +21,9 @@ class PasienRoleController extends Controller
 
     public function index()
     {
-        return view('pasien.index');
+        $policount = PoliModel::count();
+        $count = DokterModel::count();
+        return view('pasien.index', compact('count','policount'));
     }
 
     public function profile()
@@ -116,6 +120,6 @@ class PasienRoleController extends Controller
         ]);
         Alert::success('Berhasil', 'Data pasien berhasil diperbarui!');
 
-        return redirect()->route('pasien.dashboard');
+        return redirect()->route('pasien.profile');
     }
 }

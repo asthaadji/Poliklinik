@@ -5,29 +5,35 @@
 @section('content')
     <div class="container ">
         <div class="py-5">
-            <h3>Poli yang Tersedia</h3>
+            <div class="card">
+                <div class="card-header">
+                    <h2>poli yang tersedia</h2>
+                </div>
 
-            <select id="poli_select" class="form-control">
-                <option value="">Pilih Poli</option>
-                @foreach ($poli as $item)
-                    <option value="{{ $item->id }}">{{ $item->name }}</option>
-                @endforeach
-            </select>
+                <div class="card-body">
+                    <select id="poli_select" class="form-select">
+                        <option value="">Pilih Poli</option>
+                        @foreach ($poli as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                    </select>
 
-            <div class="table-responsive">
-                <table id="jadwal_table" class="table table-striped" style="display: none;">
-                    <thead>
-                        <tr>
-                            <th>Dokter</th>
-                            <th>Hari</th>
-                            <th>Jam Mulai</th>
-                            <th>Jam Selesai</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{-- jadwal akan diisi oleh AJAX --}}
-                    </tbody>
-                </table>
+                    <div class="table-responsive mt-4">
+                        <table id="jadwal_table" class="table table-striped table-bordered" style="display: none;">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Dokter</th>
+                                    <th>Hari</th>
+                                    <th>Jam Mulai</th>
+                                    <th>Jam Selesai</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{-- jadwal akan diisi oleh AJAX --}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -50,7 +56,7 @@
                                 $.each(response, function(index, jadwal) {
                                     jadwalTable.append(
                                         '<tr>' +
-                                        '<td>' + jadwal.dokter.name + '</td>' +
+                                        '<td> Dr.' + jadwal.dokter.name + '</td>' +
                                         '<td>' + jadwal.hari + '</td>' +
                                         '<td>' + jadwal.jam_mulai + '</td>' +
                                         '<td>' + jadwal.jam_selesai + '</td>' +

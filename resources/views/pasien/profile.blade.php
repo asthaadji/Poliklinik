@@ -9,31 +9,35 @@
                 <h2>Profile</h2>
             </div>
             <div class="card-body">
-                <table class="table table-bordered">
-                    <thead class="bg-primary">
-                        <tr class="text-white">
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>No Hp</th>
-                            <th>Nama Poli</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data as $pasien)
-                            <tr>
-                                <td>{{ $pasien->name }}</td>
-                                <td>{{ $pasien->alamat }}</td>
-                                <td>{{ $pasien->no_hp }}</td>
-                                <td>{{ $pasien->no_ktp }}</td>
-                                <td>
-                                    <button class="btn btn-warning btn-sm"
-                                        onclick="editPasien({{ $pasien }})">Edit</button>
-                                </td>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-primary">
+                            <tr class="text-white">
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>No Hp</th>
+                                <th>Nama Poli</th>
+                                <th>No Rm</th>
+                                <th>Action</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($data as $pasien)
+                                <tr>
+                                    <td>{{ $pasien->name }}</td>
+                                    <td>{{ $pasien->alamat }}</td>
+                                    <td>{{ $pasien->no_hp }}</td>
+                                    <td>{{ $pasien->no_ktp }}</td>
+                                    <td>{{ $pasien->no_rm }}</td>
+                                    <td>
+                                        <button class="btn btn-warning btn-sm"
+                                            onclick="editPasien({{ $pasien }})">Edit</button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
