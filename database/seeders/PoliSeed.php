@@ -22,5 +22,15 @@ class PoliSeed extends Seeder
             'name' => 'poli tht',
             'keterangan' => 'tht',
         ]);
+
+        DB::table('table_poli')->insert([
+            'name' => 'poli umum',
+            'keterangan' => 'umum',
+        ]);
+
+        DB::table('table_poli')->insert([
+            'name' => 'poli kandungan',
+            'keterangan' => 'kandungan',
+        ]);
     }
 }

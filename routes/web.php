@@ -86,7 +86,7 @@ Route::post('/pasien-login', [PasienRoleController::class, 'login'])->name('pasi
 Route::post('/register', [PasienRoleController::class, 'register'])->name('pasien.register');
 
 Route::middleware(['check_user_login:pasien'])->prefix('pasien')->group(function () {
-    Route::get('/dashboard', [PasienRoleController::class, 'index'])->name('pasien.dashboard');
+    Route::get('/dashboard', [PasienRoleController::class, 'profile'])->name('pasien.dashboard');
     Route::post('/pasien-logout', [PasienRoleController::class, 'logout'])->name('pasien.logout');
     // profile
     Route::get('/profile', [PasienRoleController::class, 'profile'])->name('pasien.profile');

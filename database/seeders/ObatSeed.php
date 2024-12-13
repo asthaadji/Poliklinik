@@ -18,5 +18,18 @@ class ObatSeed extends Seeder
             'kemasan' => 'kemasan',
             'harga' => '10000',
         ]);
+
+        DB::table('table_obat')->insert([
+            'nama_obat' => 'Prednison',
+            'kemasan' => 'kemasan',
+            'harga' => '8000',
+        ]);
+
+        DB::table('table_obat')->insert([
+            'nama_obat' => 'Dexamenthasone',
+            'kemasan' => 'kemasan',
+            'harga' => '9500',
+        ]);
+
     }
 }

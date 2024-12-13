@@ -1,4 +1,4 @@
-<footer id="footer" class="footer light-background">
+<!-- <footer id="footer" class="footer light-background">
 
     <div class="container footer-top">
         <div class="row gy-4">
@@ -73,4 +73,4 @@
         </div> --}}
     </div>
 
-</footer>
+</footer> -->
